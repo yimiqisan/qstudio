@@ -1,0 +1,60 @@
+#! /usr/bin/env bash
+
+BASE=$(dirname ${BASH_SOURCE[0]})
+
+# handles symbolic link
+if [ -h "$BASE" ]; then
+    while [ -h "$BASE" ]; do
+        BASE=$(readlink -m "$BASE")
+    done
+fi
+
+# convert to absolute path
+pushd . > /dev/null
+cd "$(dirname ${BASE})" > /dev/null
+BASE=$(pwd)
+popd > /dev/null
+
+# handles symbolic link
+if [ -h "$BASE" ]; then
+    while [ -h "$BASE" ]; do
+        BASE=$(readlink -m "$BASE")
+    done
+fi
+
+
+export BASE
+export VIRTUALENV_BIN=$(which virtualenv-2.7)
+export REQUIREMENTS="$BASE/env/requirements.txt"
+export REQUIREMENT_EXCLUDES="$BASE/env/requirement_excludes.txt"
+export STAGING_REQUIREMENTS="$BASE/env/staging_requirements.txt"
+export VIRTUALENV_PATH="$BASE/.py"
+export PYTHON_PACKAGES="$BASE/env/python-packages"
+
+source $BASE/env/functions.sh
+
+case $1 in
+    freeze)
+        freeze
+        ;;
+    upgrade)
+        upgrade
+        ;;
+    quit)
+        quit
+        ;;
+    *)
+        detect_environ
+        source $BASE/env/root_install.sh
+        echo $STUDIO_ENVIRON
+        if v_is_install; then
+            upgrade
+        else
+            v_install
+        fi
+        # install staging packages
+        if [[ $STUDIO_ENVIRON != "PRODUCTION" ]]; then
+            staging_upgrade
+        fi
+        ;;
+esac
