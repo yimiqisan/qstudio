@@ -117,6 +117,7 @@ FLASKAPP_INIT_CONTENT = """# -*- coding: utf-8 -*-\n\nfrom frame.platform.flask 
 
 
 # 初始化通用的全局变量
+
 def init_environ(appname):
     """
         environ指的是在本模块中使用到的全局变量
@@ -146,7 +147,7 @@ def parse_app_tree(parse_path, treeobj):
 
     for key, value in treeobj.iteritems():
 
-        if key == "{appname}":
+        if key.count("{appname}") > 0:
             key = key.format(appname=APPNAME)
 
         if value == "package":
@@ -166,7 +167,6 @@ def parse_app_tree(parse_path, treeobj):
             parse_app_tree(sub_path, value)
 
 
-# 各种初始化函数
 def init_python_package(path, name):
     tmp_path = os.path.join(path, name)
     if not os.path.exists(tmp_path):

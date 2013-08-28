@@ -91,31 +91,6 @@ uwsgi_version() {
     uwsgi --version
 }
 
-#jwsgi_install() {
-#    UWSGI_EMPEROR="$VIRTUALENV_PATH/etc/uwsgi/vassals"
-#    mkdir -p $UWSGI_EMPEROR
-#    pushd . > /dev/null
-#    cd $BASE/.py/etc/uwsgi/vassals
-#    if [ "$(uwsgi --plugins jvm,jwsgi 2>&1|grep 'UNABLE to load uWSGI plugin')" ]; then
-#        echo_info "Installing jvm and jwsgi plugins for uwsgi..."
-#        mkdir $BASE/build
-#        UWSGI_VERSION=`uwsgi_version`
-#        cp $BASE/env/python-packages/uwsgi-$UWSGI_VERSION.tar.gz $BASE/build
-#        cd $BASE/build
-#        tar -xvf uwsgi-$UWSGI_VERSION.tar.gz
-#        cd uwsgi-$UWSGI_VERSION
-#        python uwsgiconfig.py --build core
-#        python uwsgiconfig.py --plugin plugins/jvm core
-#        python uwsgiconfig.py --plugin plugins/jwsgi core
-#        cp ./jvm_plugin.so $BASE/.py/etc/uwsgi/vassals
-#        cp ./jwsgi_plugin.so $BASE/.py/etc/uwsgi/vassals
-#        echo $UWSGI_VERSION | cat
-#        cd $BASE
-#        rm -rf $BASE/build
-#    fi
-#    popd > /dev/null
-#}
-
 upgrade() {
     v_activate
     command pip install -r $REQUIREMENTS \

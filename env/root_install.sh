@@ -112,7 +112,7 @@ apt_install libxslt1-dev
 apt_install zlib1g-dev
 #apt_install mercurial
 
-apt_install openjdk-7-jdk
+#apt_install openjdk-7-jdk
 apt_install maven2
 
 if [ -z $(which pip-2.7) ]; then
@@ -128,19 +128,19 @@ if [[ $STUDIO_ENVIRON != "PRODUCTION" ]]; then
     dir_install /var/lib/nginx/proxy/
     dir_install /var/lib/nginx/scgi/
     dir_install /var/lib/nginx/uwsgi/
-    apt_purge mercurial
-    pip_install mercurial==2.5.4 $BASE/env/python-packages/mercurial-2.5.4.tar.gz
+#    apt_purge mercurial
+#    pip_install mercurial==2.5.4 $BASE/env/python-packages/mercurial-2.5.4.tar.gz
     pip_install pep8==1.4.5 $BASE/env/python-packages/pep8-1.4.5.tar.gz
     pip_install pyflakes==0.7.2 $BASE/env/python-packages/pyflakes-0.7.2.tar.gz
     pip_install mccabe==0.2.1 $BASE/env/python-packages/mccabe-0.2.1.tar.gz
     pip_install flake8==2.0 $BASE/env/python-packages/flake8-2.0.tar.gz
-    pip_install hghooks==0.5.5 $BASE/env/python-packages/hghooks-0.5.5.tar.gz
-    dir_install /etc/mercurial/hgrc.d/
+#    pip_install hghooks==0.5.5 $BASE/env/python-packages/hghooks-0.5.5.tar.gz
+#    dir_install /etc/mercurial/hgrc.d/
     dir_install /etc/bash_completion.d/
-    file_install $BASE/env/mercurial/etc/mercurial/hgrc /etc/mercurial/hgrc
-    file_install $BASE/env/mercurial/etc/mercurial/hgrc.d/cacerts.rc /etc/mercurial/hgrc.d/cacerts.rc
-    file_install $BASE/env/mercurial/etc/mercurial/hgrc.d/mergetools.rc /etc/mercurial/hgrc.d/mergetools.rc
+#    file_install $BASE/env/mercurial/etc/mercurial/hgrc /etc/mercurial/hgrc
+#    file_install $BASE/env/mercurial/etc/mercurial/hgrc.d/cacerts.rc /etc/mercurial/hgrc.d/cacerts.rc
+#    file_install $BASE/env/mercurial/etc/mercurial/hgrc.d/mergetools.rc /etc/mercurial/hgrc.d/mergetools.rc
     file_install $BASE/env/mercurial/etc/bash_completion.d/mercurial /etc/bash_completion.d/mercurial
-    file_install $BASE/env/mercurial/hgflow.py $(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")/hgflow.py
+#    file_install $BASE/env/mercurial/hgflow.py $(python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")/hgflow.py
 fi
 pip_install virtualenv==1.9.1 $BASE/env/python-packages/virtualenv-1.9.1.tar.gz

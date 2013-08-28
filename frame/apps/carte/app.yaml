@@ -1,0 +1,13 @@
+DEVELOPMENT: &defaults
+    APPNAME: carte
+    MODULE: carte:app
+    DEBUG: true
+    DEFAULT_SUBDOMAIN: www
+
+STAGING:
+    <<: *defaults
+
+PRODUCTION:
+    <<: *defaults
+    DEBUG: false
+    MAIL_DEBUG: false
